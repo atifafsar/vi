@@ -1,70 +1,104 @@
 {
-  "Id": 666,
-  "Version": 0,
-  "OrgId": 1,
-  "DashboardId": 1280,
-  "PanelId": 29,
-  "Name": "10+ events failed on Data Stream Publisher",
-  "Message": "",
-  "Severity": "",
-  "State": "ok",
-  "Handler": 1,
-  "Silenced": false,
-  "ExecutionError": " ",
-  "Frequency": 300,
-  "For": 300000000000,
-  "EvalData": {},
-  "NewStateDate": "2024-06-19T16:07:09Z",
-  "StateChanges": 706,
-  "Created": "2022-08-18T03:45:36Z",
-  "Updated": "2023-02-07T07:41:16Z",
-  "Settings": {
-    "alertRuleTags": {},
-    "conditions": [
-      {
-        "evaluator": {
-          "params": [
-            50
-          ],
-          "type": "gt"
-        },
-        "operator": {
-          "type": "and"
-        },
-        "query": {
-          "datasourceId": 47,
-          "model": {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "000000047"
+  "apiVersion": 1,
+  "groups": [
+    {
+      "orgId": 1,
+      "name": "Failed payout runs alert",
+      "folder": "Bookings",
+      "interval": "1h",
+      "rules": [
+        {
+          "uid": "d22eab52-6a92-43e9-8665-08ba5827402e",
+          "title": "Failed payout runs alert",
+          "condition": "B",
+          "data": [
+            {
+              "refId": "A",
+              "relativeTimeRange": {
+                "from": 3600,
+                "to": 0
+              },
+              "datasourceUid": "000000065",
+              "model": {
+                "format": "time_series",
+                "group": [],
+                "metricColumn": "none",
+                "rawQuery": true,
+                "rawSql": "SELECT\n  created_at as time,\n  payout_run_name as metric,\n  count(*) as value\nFROM v2ps_payout_run pr\nWHERE $__timeFilter(created_at) and status = 'FAILED'\ngroup by payout_run_name\nhaving count(*) > 1",
+                "refId": "A",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "id"
+                      ],
+                      "type": "column"
+                    }
+                  ]
+                ],
+                "table": "accounting_travel_date_reached",
+                "timeColumn": "notifiedDateTime",
+                "timeColumnType": "timestamp",
+                "where": [
+                  {
+                    "name": "$__timeFilter",
+                    "params": [],
+                    "type": "macro"
+                  }
+                ]
+              }
             },
-            "expr": "sum(increase(eventbus_processing_outcome:eventbus_subscriber_processing_failure_count{service_name=\"data-stream-publisher\", failure_reason !=\"UnknownEventClassException\", environment_name=\"prod\"}[5m])) by (failure_reason, event_type)",
-            "refId": "A"
+            {
+              "refId": "B",
+              "relativeTimeRange": {
+                "from": 0,
+                "to": 0
+              },
+              "datasourceUid": "__expr__",
+              "model": {
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [
+                        0
+                      ],
+                      "type": "gt"
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": [
+                        "A"
+                      ]
+                    },
+                    "reducer": {
+                      "type": "max"
+                    }
+                  }
+                ],
+                "refId": "B",
+                "type": "classic_conditions"
+              }
+            }
+          ],
+          "dashboardUid": "4bnJH36Gz",
+          "panelId": 23,
+          "noDataState": "OK",
+          "execErrState": "Alerting",
+          "for": "0s",
+          "annotations": {
+            "__alertId__": "498",
+            "__dashboardUid__": "4bnJH36Gz",
+            "__panelId__": "23",
+            "message": "A payout run has failed"
           },
-          "params": [
-            "A",
-            "15m",
-            "now"
-          ]
-        },
-        "reducer": {
-          "params": [],
-          "type": "max"
-        },
-        "type": "query"
-      }
-    ],
-    "executionErrorState": "keep_state",
-    "for": "5m",
-    "frequency": "5m",
-    "handler": 1,
-    "message": "",
-    "name": "10+ events failed on Data Stream Publisher",
-    "noDataState": "ok",
-    "notifications": [
-      {
-        "uid": "R2jxbG3Gk"
-      }
-    ]
-  }
+          "labels": {
+            "rule_uid": "d22eab52-6a92-43e9-8665-08ba5827402e"
+          },
+          "isPaused": false
+        }
+      ]
+    }
+  ]
 }
