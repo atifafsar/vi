@@ -1,0 +1,848 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1311,
+  "iteration": 1665570935811,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:47:10Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:52:20Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Review Rate",
+        "type": "graph",
+        "uid": "YCvvbuVVk",
+        "version": 3
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:1119",
+          "alias": "Review Rate",
+          "color": "#56A64B"
+        },
+        {
+          "$$hashKey": "object:1127",
+          "alias": "Review Failure Rate",
+          "color": "#C4162A"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "exemplar": true,
+          "expr": "clamp_min(sum(max_over_time(review_submit:COUNT{prometheus_environment=\"${env:text}\"}[$interval]) or vector(0)) - sum(max_over_time(review_submit:COUNT{prometheus_environment=\"${env:text}\"}[$interval] offset $interval) or vector(0)), 0)",
+          "interval": "",
+          "legendFormat": "Review Rate",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "exemplar": true,
+          "expr": "sum(increase(review_submit_failure:COUNT{prometheus_environment=\"${env:text}\"}[$interval]))",
+          "interval": "",
+          "legendFormat": "Review Failure Rate",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Review Rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:105",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:106",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "super-light-orange",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 11
+      },
+      "id": 4,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:49:07Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:53:13Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Review Start Writing",
+        "type": "stat",
+        "uid": "Tk9cbXV4k",
+        "version": 2
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "exemplar": true,
+          "expr": "sum(increase(REVIEW_START_COUNT{prometheus_environment=\"${env:text}\"}[$__range]))",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Start Writing",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 11
+      },
+      "id": 6,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:49:11Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:54:26Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Review Finish Writing",
+        "type": "stat",
+        "uid": "G-gpxXVVk",
+        "version": 2
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "exemplar": true,
+          "expr": "clamp_min(\n  sum(increase(review_submit:COUNT{prometheus_environment=\"${env:text}\"}[$__range]))\n  - sum(increase(review_submit_failure:COUNT{prometheus_environment=\"${env:text}\"}[$__range]))\n, 0)",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Finish Writing",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 15,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Batches"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 12,
+      "interval": "",
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:56:51Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:58:48Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Photo Upload Review Batch Size distribution over last day",
+        "type": "bargauge",
+        "uid": "5bkXxX44z",
+        "version": 2
+      },
+      "links": [],
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"1\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "1 photo",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"2\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "2 photos",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"3\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "3 photos",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"4\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "4 photos",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"5\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "5 photos",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"6\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "6 photos",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"7\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "7 photos",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"8\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "8 photos",
+          "refId": "H"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"9\"}) or vector(0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "9 photos",
+          "refId": "I"
+        },
+        {
+          "expr": "sum(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"10\"}) or vector(0)",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "10 photos",
+          "refId": "J"
+        },
+        {
+          "expr": "(\n    (sum(max_over_time(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"10\"}[1d]))) - \n    (sum(max_over_time(PHOTO_UPLOAD_TIME_MILLISECONDS_count{batch_size=\"10\"}[1d] offset 1d)) or vector(0))\n) or vector(0)",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "K"
+        }
+      ],
+      "title": "Batch Size distribution over last day",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Number Of Photos",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Successful Uploads"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#37872D",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unsuccessful Uploads"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#C4162A",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 8,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:56:47Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:56:47Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Review Photos Uploaded",
+        "type": "timeseries",
+        "uid": "_vj_xu44k",
+        "version": 1
+      },
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "expr": "clamp_min(sum(PHOTO_UPLOAD_COUNT) - sum(PHOTO_UPLOAD_COUNT offset $interval), 0)",
+          "interval": "",
+          "legendFormat": "Successful Uploads",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "clamp_min(sum(PHOTO_UPLOAD_ERROR) - sum(PHOTO_UPLOAD_ERROR offset $interval), 0)",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Unsuccessful Uploads",
+          "refId": "B"
+        }
+      ],
+      "title": "Photos Uploaded",
+      "type": "timeseries"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:57:06Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:57:06Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Review Error Proportion Per Photo",
+        "type": "graph",
+        "uid": "NNAubuVVz",
+        "version": 1
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": true,
+      "pluginVersion": "8.5.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:279",
+          "alias": "Error rate",
+          "color": "#C4162A"
+        },
+        {
+          "$$hashKey": "object:287",
+          "alias": "Success Rate",
+          "color": "#37872D"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(\n    (sum(PHOTO_UPLOAD_COUNT) - sum(PHOTO_UPLOAD_FAILURE_COUNT or vector(0))) - (sum(PHOTO_UPLOAD_COUNT offset $interval) - sum((PHOTO_UPLOAD_FAILURE_COUNT offset $interval) or vector(0)))\n) / clamp_min(sum(PHOTO_UPLOAD_COUNT) - sum(PHOTO_UPLOAD_COUNT offset $interval), 1)",
+          "interval": "",
+          "legendFormat": "Success Rate",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "(\n    clamp_min(sum(PHOTO_UPLOAD_FAILURE_COUNT) - sum(PHOTO_UPLOAD_FAILURE_COUNT offset $interval), 0)\n) / clamp_min(sum(PHOTO_UPLOAD_COUNT) - sum(PHOTO_UPLOAD_COUNT offset $interval), 1)",
+          "interval": "",
+          "legendFormat": "Error rate",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Error Proportion Per Photo",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2393",
+          "format": "percentunit",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2394",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "1h",
+          "value": "1h"
+        },
+        "hide": 0,
+        "name": "interval",
+        "options": [
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          }
+        ],
+        "query": "1h",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "prod",
+          "value": "prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "env",
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          }
+        ],
+        "query": "prod",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "TV/Reviews",
+  "uid": "mW9oxuV4k",
+  "version": 11,
+  "weekStart": ""
+}

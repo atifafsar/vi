@@ -1,0 +1,534 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1312,
+  "iteration": 1677520602632,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:30:32Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T02:06:03Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Firebase Attempts",
+        "type": "bargauge",
+        "uid": "ScXd1u4Vz",
+        "version": 3
+      },
+      "links": [],
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(increase(FIREBASE_ATTEMPT{SOURCE=\"$Source\", prometheus_environment=\"prod\"}[$__range])) without (instance, job, SOURCE, pod, prometheus_role, cluster, prometheus, namespace, service, prometheus_monitor, endpoint)",
+          "interval": "",
+          "legendFormat": "{{ACTION}}",
+          "queryType": "randomWalk",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Attempts",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:30:41Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:30:41Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Firebase Success",
+        "type": "bargauge",
+        "uid": "xnMK1uV4z",
+        "version": 1
+      },
+      "links": [],
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "exemplar": true,
+          "expr": "sum(increase(FIREBASE_RESULT{SOURCE=\"$Source\", RESULT=\"SUCCESS\", prometheus_environment=\"prod\"}[$__range])) without (instance, job, SOURCE, pod, prometheus_role, cluster, prometheus, namespace, service, prometheus_monitor, endpoint)",
+          "interval": "",
+          "legendFormat": "{{ACTION}} {{RESULT}}",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Success",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "100 * sum(increase(FIREBASE_RESULT{SOURCE=\"$Source\", prometheus_environment=\"prod\", RESULT=\"SUCCESS\"}[$__range])) by (ACTION) / sum(increase(FIREBASE_ATTEMPT{SOURCE=\"$Source\", prometheus_environment=\"prod\"}[$__range])) by (ACTION)",
+          "legendFormat": "{{ACTION}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Success Rate",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 8,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "percent",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "sum (\n    increase(FIREBASE_RESULT{SOURCE=\"$Source\", RESULT=\"ERROR\", prometheus_environment=\"prod\", ERROR!~'.*auth/wrong-password.*'}[5m])\n)",
+          "hide": false,
+          "interval": "30s",
+          "legendFormat": "Error",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(\n    increase(FIREBASE_RESULT{SOURCE=\"$Source\", RESULT=\"SUCCESS\", prometheus_environment=\"prod\"}[5m])\n)",
+          "interval": "30s",
+          "legendFormat": "Success",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Error % over time",
+      "type": "barchart"
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "Login",
+            "Signup",
+            "EnterEmail",
+            "RequestMagicLink",
+            "MagicLink",
+            "SocialRedirect",
+            "SocialSignIn",
+            "LinkCredential",
+            "AddPassword"
+          ],
+          "value": [
+            "Login",
+            "Signup",
+            "EnterEmail",
+            "RequestMagicLink",
+            "MagicLink",
+            "SocialRedirect",
+            "SocialSignIn",
+            "LinkCredential",
+            "AddPassword"
+          ]
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": true,
+        "name": "Action",
+        "options": [
+          {
+            "selected": true,
+            "text": "Login",
+            "value": "Login"
+          },
+          {
+            "selected": true,
+            "text": "Signup",
+            "value": "Signup"
+          },
+          {
+            "selected": true,
+            "text": "EnterEmail",
+            "value": "EnterEmail"
+          },
+          {
+            "selected": true,
+            "text": "RequestMagicLink",
+            "value": "RequestMagicLink"
+          },
+          {
+            "selected": true,
+            "text": "MagicLink",
+            "value": "MagicLink"
+          },
+          {
+            "selected": true,
+            "text": "SocialSignIn",
+            "value": "SocialSignIn"
+          },
+          {
+            "selected": true,
+            "text": "LinkCredential",
+            "value": "LinkCredential"
+          },
+          {
+            "selected": true,
+            "text": "AddPassword",
+            "value": "AddPassword"
+          }
+        ],
+        "query": "Login,Signup,EnterEmail,RequestMagicLink,MagicLink,SocialSignIn,LinkCredential,AddPassword",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "UNIFIED_SIGNIN_SIGNUP",
+          "value": "UNIFIED_SIGNIN_SIGNUP"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Source",
+        "options": [
+          {
+            "selected": false,
+            "text": "DEFAULT_SIGNIN_SIGNUP",
+            "value": "DEFAULT_SIGNIN_SIGNUP"
+          },
+          {
+            "selected": true,
+            "text": "UNIFIED_SIGNIN_SIGNUP",
+            "value": "UNIFIED_SIGNIN_SIGNUP"
+          }
+        ],
+        "query": "DEFAULT_SIGNIN_SIGNUP,UNIFIED_SIGNIN_SIGNUP",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "TV/Firebase",
+  "uid": "Vo-V-uV4k",
+  "version": 9,
+  "weekStart": ""
+}

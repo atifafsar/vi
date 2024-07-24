@@ -1,0 +1,836 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1309,
+  "iteration": 1665131177582,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "Success.*"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*FeignException.*"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*RetryableException.*"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*UnknownRemoteException.*"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*NullPointerException.*"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:19:14Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-11-03T01:54:57Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Publisher Event Bus Events",
+        "type": "timeseries",
+        "uid": "ab7PAuVVz",
+        "version": 3
+      },
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(eventbus_processing_outcome:eventbus_subscriber_processing_success_count{service_name=\"data-stream-publisher\", environment_name=\"${env:text}\", processor_name!=\"router\", attempt_number=\"1\"}[$interval])) by (event_type)",
+          "hide": false,
+          "legendFormat": "Success: {{event_type}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "expr": "sum(increase(eventbus_processing_outcome:eventbus_subscriber_processing_failure_count{service_name=\"data-stream-publisher\", failure_reason !=\"UnknownEventClassException\", environment_name=\"${env:text}\", processor_name!=\"router\", attempt_number=\"1\"}[$interval])) by (failure_reason, event_type)",
+          "refId": "A"
+        }
+      ],
+      "title": "Event Bus Events",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "interval": "1m",
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:19:25Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:19:25Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Publisher Event Bus Timing Percentiles",
+        "type": "timeseries",
+        "uid": "Tf0P0X4Vk",
+        "version": 1
+      },
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(eventbus_processing_performance:eventbus_subscriber_processing_latency_millis_bucket{environment_name=\"${env:text}\", service_name=\"data-stream-publisher\", processor_name!~\"(router|.*(skip))$\"}[$interval])))",
+          "legendFormat": "p50",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(eventbus_processing_performance:eventbus_subscriber_processing_latency_millis_bucket{environment_name=\"${env:text}\", service_name=\"data-stream-publisher\", processor_name!~\"(router|.*(skip))$\"}[$interval])))",
+          "hide": false,
+          "legendFormat": "p95",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.99, sum by(le) (rate(eventbus_processing_performance:eventbus_subscriber_processing_latency_millis_bucket{environment_name=\"${env:text}\", service_name=\"data-stream-publisher\", processor_name!~\"(router|.*(skip))$\"}[5m])))",
+          "hide": false,
+          "legendFormat": "p99",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.999, sum by(le) (rate(eventbus_processing_performance:eventbus_subscriber_processing_latency_millis_bucket{environment_name=\"${env:text}\", service_name=\"data-stream-publisher\", processor_name!~\"(router|.*(skip))$\"}[5m])))",
+          "hide": false,
+          "legendFormat": "p999",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "Event Bus Timing Percentiles",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableVisitorRecognised"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableBookingConfirmed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableEmailSubscriptionCreated"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableMemberUpdated"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableEmailSubscriptionUpdated"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableProductViewed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Success: ImmutableDestinationViewed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 6,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:19:37Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:19:37Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Publisher Dead Messages",
+        "type": "timeseries",
+        "uid": "xOrE0X44z",
+        "version": 1
+      },
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(eventbus_dead_messages:eventbus_subscriber_dead_message_count{service_name=\"data-stream-publisher\", environment_name=\"${env:text}\"}[$interval])) by (event_type)",
+          "hide": false,
+          "legendFormat": "{{event_type}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Dead Messages",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000047"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 8,
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 2,
+          "created": "2022-10-07T01:19:48Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          },
+          "folderName": "Member Experience",
+          "folderUid": "lYdOjG0Mz",
+          "updated": "2022-10-07T01:19:48Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/0210adff781fe29c81d768426e7bb4da",
+            "id": 172,
+            "name": "withompson"
+          }
+        },
+        "name": "Publisher Processing Queue Depth",
+        "type": "timeseries",
+        "uid": "OB4sAXVVk",
+        "version": 1
+      },
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "000000047"
+          },
+          "editorMode": "code",
+          "expr": "sum(org_apache_activemq_Broker_QueueSize{destinationType=\"Queue\", prometheus_environment=\"${env:text}\", destinationName=~\"Consumer.*-data-stream-publisher-routing.*\"}) by (destinationName)",
+          "legendFormat": "{{destinationName}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Processing Queue Depth",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "1m",
+          "value": "1m"
+        },
+        "hide": 0,
+        "name": "interval",
+        "options": [
+          {
+            "selected": true,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "1m,5m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "prod",
+          "value": "prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "env",
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          }
+        ],
+        "query": "prod",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5m"
+    ]
+  },
+  "timezone": "",
+  "title": "TV/Publisher",
+  "uid": "I9YwAXVVk",
+  "version": 3,
+  "weekStart": ""
+}
